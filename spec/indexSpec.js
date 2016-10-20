@@ -12,13 +12,23 @@
 'use strict';
 
 var Promise = require('bluebird');
+var proxyquire = require('proxyquire');
 var handlers = require('../lib/handlers');
 var lib = require('../lib');
 
 describe('validation', function () {
+    var lib;
+    var handlers;
     beforeEach(function () {
-        spyOn(handlers, 'json').and.returnValue(Promise.fulfilled());
-        spyOn(handlers, 'po').and.returnValue(Promise.fulfilled());
+        handlers = {
+            json: jasmine.createSpy('json').and.returnValue(Promise.fulfilled()),
+            po: jasmine.createSpy('po').and.returnValue(Promise.fulfilled())
+        }
+        lib = proxyquire('../lib', { './handlers': handlers });
+    });
+
+    afterEach(function () {
+        lib = undefined;
     });
 
     [

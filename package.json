@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "istanbul": "^0.4.5",
-    "jasmine": "^2.5.2"
+    "jasmine": "^2.5.2",
+    "proxyquire": "^1.7.10"
   }
 }
